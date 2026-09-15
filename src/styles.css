@@ -202,3 +202,5 @@ legend { display:block; width:100%; font-size:23px; line-height:1.6; font-weight
 .storage-notice { max-width:462px; margin:0 auto; padding:12px 20px; font-size:12px; line-height:1.7; background:#fff0ce; color:#67512f; }
 .poster-image { display:block; width:100%; height:auto; border-radius:3px; -webkit-touch-callout:default; user-select:auto; }
 .download-button { display:block; padding:14px; text-align:center; color:#fff; background:#284f40; border-radius:12px; text-decoration:none; font-size:14px; }
+
+.character-loading { min-height: 285px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 13px; }

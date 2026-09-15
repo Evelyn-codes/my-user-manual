@@ -20,4 +20,6 @@ export const images:Record<ResultKey,string> = {
   "A3-B3-C2": "/characters/18.jpeg"
 };
 
-export const characterImage=(key:ResultKey)=>`${import.meta.env.BASE_URL}${images[key].slice(1)}`;
+export const characterImage=(key:ResultKey)=>`${import.meta.env.BASE_URL}characters/v2/${images[key].split('/').at(-1)!.slice(0,2)}.jpg`;
+
+export const characterThumbnail=(key:ResultKey)=>characterImage(key).replace('.jpg','-thumb.jpg');

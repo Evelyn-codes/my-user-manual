@@ -1,13 +1,13 @@
 import QRCode from 'qrcode';
 import type {ResultCard} from '../data/types';
-import { characterImage } from '../data/images';
+import {loadCharacter} from './character';
 import { resultLink } from './links';
 const font='-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif';
 const palette={A1:{bg:'#ecf2f4',ink:'#294956',soft:'#dce7eb'},A2:{bg:'#f9f4e3',ink:'#5a502f',soft:'#efe3be'},A3:{bg:'#eef5e8',ink:'#325640',soft:'#dcebd0'}};
 function loadImage(src:string):Promise<HTMLImageElement>{return new Promise((resolve,reject)=>{const img=new Image();const timer=setTimeout(()=>reject(new Error('图片加载超时，请重试')),15000);img.onload=()=>{clearTimeout(timer);resolve(img)};img.onerror=()=>{clearTimeout(timer);reject(new Error('角色图片加载失败，请重试'))};img.src=src})}
 export async function generatePoster(card:ResultCard):Promise<{url:string;width:number;height:number;link:string}> {
  const link=resultLink(card.key);
- const [character]=await Promise.all([loadImage(characterImage(card.key)),document.fonts?.ready]);
+ const [character]=await Promise.all([loadCharacter(card.key),document.fonts?.ready]);
  const qr=await QRCode.toDataURL(link,{width:300,margin:4,errorCorrectionLevel:'M',color:{dark:'#17382a',light:'#ffffff'}});
  const qrImage=await loadImage(qr);
  const canvas=document.createElement('canvas');const ctx=canvas.getContext('2d');if(!ctx)throw new Error('当前浏览器不支持生成海报');
@@ -39,7 +39,12 @@ export async function generatePoster(card:ResultCard):Promise<{url:string;width:
  const quoteHeight=ascent+descent+(osLines.length-1)*23;
  block(osLines,0,y+(osHeight-quoteHeight)/2+ascent,23,13,true,true);
  ctx.textBaseline='top';y+=osHeight+14;
- const scale=Math.min(126/character.naturalWidth,168/character.naturalHeight);const w=character.naturalWidth*scale,h=character.naturalHeight*scale;ctx.drawImage(character,(360-w)/2,y+(168-h)/2,w,h);y+=168+18;
+ const scale=Math.min(126/character.naturalWidth,168/character.naturalHeight);const w=character.naturalWidth*scale,h=character.naturalHeight*scale;ctx.drawImage(character,(360-w)/2,y+(168-h)/2,w,h);
+ // Refuse an export if a browser silently failed to paint the decoded character.
+ const pixels=ctx.getImageData(Math.round((360-w)/2*3),Math.round((y+(168-h)/2)*3),Math.floor(w*3),Math.floor(h*3)).data;
+ let min=255,max=0;for(let i=0;i<pixels.length;i+=40){min=Math.min(min,pixels[i]);max=Math.max(max,pixels[i])}
+ if(max-min<12)throw new Error('角色图片未能完整绘入，请重新生成海报');
+ y+=168+18;
  block(description,20,y,20,11);y+=description.length*20+16;
  ctx.fillStyle='#ffffff99';ctx.fillRect(20,y,320,tipsHeight);text('好友使用说明',32,y+11,12,true);let tipY=y+35;
  tipLines.forEach((items,i)=>{text(`0${i+1}`,32,tipY+2,9);block(items,51,tipY,20,11);tipY+=items.length*20+10});y+=tipsHeight+18;
