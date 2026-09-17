@@ -19,7 +19,7 @@ export async function generatePoster(card:ResultCard):Promise<{url:string;width:
  // Balance multi-line quotes so a final word is not stranded on its own line.
  const quoteLineCount=osLines.length;
  if(quoteLineCount>1)for(let width=299;width>=140;width--){const candidate=lines(card.os,width,13,true);if(candidate.length>quoteLineCount)break;osLines=candidate;}
- const description=lines(card.description.replace(/\n/g,''),320,11);
+ const description=lines(card.description.replace(/\n/g,''),296,11);
  const tipLines=card.tips.map(t=>lines(t,281,11));
  const osHeight=osLines.length*23+16;
  const tipsHeight=33+tipLines.reduce((n,a)=>n+a.length*20+10,0);
@@ -28,7 +28,7 @@ export async function generatePoster(card:ResultCard):Promise<{url:string;width:
  const text=(value:string,x:number,y:number,size:number,bold=false)=>{setFont(size,bold);ctx.fillStyle=theme.ink;ctx.fillText(value,x,y)};
  const block=(items:string[],x:number,y:number,leading:number,size:number,bold=false,center=false)=>{items.forEach((line,i)=>{setFont(size,bold);text(line,center?(360-ctx.measureText(line).width)/2:x,y+i*leading,size,bold)})};
  // Booklet icon drawn locally, matching the UI's outline style.
- ctx.strokeStyle=theme.ink;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(20,26);ctx.quadraticCurveTo(25,24,30,27);ctx.quadraticCurveTo(35,24,40,26);ctx.lineTo(40,41);ctx.quadraticCurveTo(35,39,30,42);ctx.quadraticCurveTo(25,39,20,41);ctx.closePath();ctx.moveTo(30,27);ctx.lineTo(30,42);ctx.stroke();text('本人使用说明书',47,28,10);text(card.code,282,28,9);
+ ctx.strokeStyle=theme.ink;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(20,26);ctx.quadraticCurveTo(25,24,30,27);ctx.quadraticCurveTo(35,24,40,26);ctx.lineTo(40,41);ctx.quadraticCurveTo(35,39,30,42);ctx.quadraticCurveTo(25,39,20,41);ctx.closePath();ctx.moveTo(30,27);ctx.lineTo(30,42);ctx.stroke();text('我的社交人格是：',47,28,11);setFont(11);text('你的呢？',340-ctx.measureText('你的呢？').width,28,11);
  let y=64;setFont(22,true);const nameWidth=ctx.measureText(card.name).width;setFont(17.96);const codeText=` · ${card.code}`;const codeWidth=ctx.measureText(codeText).width;const x=(360-nameWidth-codeWidth)/2;text(card.name,x,y,22,true);text(codeText,x+nameWidth,y+4,17.96);y+=42;
  ctx.fillStyle='#ffffff99';ctx.fillRect(15,y,330,osHeight);
  // Center the visible glyph bounds, including multi-line leading, within the stripe.
@@ -45,11 +45,11 @@ export async function generatePoster(card:ResultCard):Promise<{url:string;width:
  let min=255,max=0;for(let i=0;i<pixels.length;i+=40){min=Math.min(min,pixels[i]);max=Math.max(max,pixels[i])}
  if(max-min<12)throw new Error('角色图片未能完整绘入，请重新生成海报');
  y+=168+18;
- block(description,20,y,20,11);y+=description.length*20+16;
+ block(description,32,y,20,11);y+=description.length*20+16;
  ctx.fillStyle='#ffffff99';ctx.fillRect(20,y,320,tipsHeight);text('好友使用说明',32,y+11,12,true);let tipY=y+35;
- tipLines.forEach((items,i)=>{text(`0${i+1}`,32,tipY+2,9);block(items,51,tipY,20,11);tipY+=items.length*20+10});y+=tipsHeight+18;
+ tipLines.forEach((items,i)=>{text(`0${i+1}`,32,tipY,11);block(items,51,tipY,20,11);tipY+=items.length*20+10});y+=tipsHeight+18;
  ctx.strokeStyle=theme.soft;ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(340,y);ctx.stroke();y+=10;
- text('扫一下，生成你的说明书',20,y+24,12,true);text('约我之前，建议先读一下。',20,y+48,9);
+ text('扫一下，生成你的说明书',20,y+24,12,true);text('约我之前，建议先读一下。',20,y+48,11);
  ctx.imageSmoothingEnabled=false;ctx.drawImage(qrImage,240,y,100,100);
  const blob=await new Promise<Blob>((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('海报生成失败，请重试')),'image/png'));
  return {url:URL.createObjectURL(blob),width:canvas.width,height:canvas.height,link};

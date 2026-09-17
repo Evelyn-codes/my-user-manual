@@ -20,6 +20,6 @@ for(const [index,result] of results.entries()){
  assert.deepEqual(fixture.scores,scores);
  assert.deepEqual(fixture.bars,scores.map(score=>Math.round((score+18)/36*100)));
 }
-assert.ok(questions[0].options[0].text.endsWith('是需要准备'));
+assert.ok(questions[0].options[0].text.endsWith('先把信息补齐再说'));
 assert.ok(results[3].description.startsWith('你坐那儿看起来只是来吃饭的'));
 console.log('PASS: 18 questions, 72 exact options/scores, 18 revised result cards/image mappings and fixed preview fixtures.');

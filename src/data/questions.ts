@@ -1,12 +1,12 @@
-import type { Question } from './types';
-export const questions = [
+import type {Question} from './types';
+export const questions:Question[] = [
   {
     "id": 1,
-    "title": "周一早上，群里有人问「这周六聚一下？」，时间地点都没定。",
+    "title": "周一早上，群里突然有人问：「这周六聚一下？」时间地点都没定，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "秒问「几点、在哪、都有谁、几点结束」——不是热情，是需要准备",
+        "text": "「几点？在哪？都有谁？大概几点结束？」先把信息补齐再说",
         "scores": [
           -1,
           1,
@@ -15,7 +15,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「都行，你们定。」然后每隔十分钟刷一次群",
+        "text": "「都行，你们定。」嘴上很随和，实际上一直在等后续消息",
         "scores": [
           1,
           -1,
@@ -24,7 +24,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "「看情况，周四给你答复。」（其实周三晚上就想好了）",
+        "text": "「我先看看安排，周四前告诉你。」不急着当场做决定",
         "scores": [
           0,
           0,
@@ -33,7 +33,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "先不回。等有人带头了，再跟一句「我也去」",
+        "text": "先不回，等大家聊得差不多了，再冒出来一句：「算我一个」",
         "scores": [
           0,
           0,
@@ -44,11 +44,11 @@ export const questions = [
   },
   {
     "id": 2,
-    "title": "周六出门前，朋友说聚会取消了。",
+    "title": "周六已经换好衣服准备出门了，朋友突然说聚会取消了，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "有点失落。为这场聚会准备的两个故事，已经写好了",
+        "text": "有点失落。人都准备好了，情绪也已经出门了",
         "scores": [
           -1,
           1,
@@ -57,7 +57,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「太好了。」睡衣已经换回来了，速度比出门还快",
+        "text": "松一口气，三分钟内换回睡衣",
         "scores": [
           -1,
           -1,
@@ -66,7 +66,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "立刻在群里发「那下周六？」——聚会可以取消，但不能断更",
+        "text": "立刻问：「那改哪天？」今天可以取消，这个局不能消失",
         "scores": [
           1,
           1,
@@ -75,7 +75,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "打给另一个朋友：「你今天有空吗？」（取消一个局，补一个局）",
+        "text": "转头问另一个朋友：「你今天有空吗？」",
         "scores": [
           1,
           -1,
@@ -86,11 +86,11 @@ export const questions = [
   },
   {
     "id": 3,
-    "title": "下午三点，一个陌生号码打进来。",
+    "title": "下午三点，一个陌生号码突然打进来，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "接起来第一句：「你好，哪位？」（这套流程我走了一千遍）",
+        "text": "直接接：「你好，哪位？」",
         "scores": [
           1,
           0,
@@ -99,7 +99,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "不接。等对方发消息说明来意（万一呢）",
+        "text": "不接，等对方发消息说明来意",
         "scores": [
           -1,
           0,
@@ -108,7 +108,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "盯着屏幕十秒，把最近的人和事在脑子里过一遍，才敢接",
+        "text": "盯着号码想一圈：快递？同事？医院？诈骗？……想完再决定接不接",
         "scores": [
           0,
           1,
@@ -117,7 +117,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "接起来先说：「我在忙，长话短说可以吗？」（其实不忙）",
+        "text": "接起来先说：「你好，我现在不太方便，什么事？」",
         "scores": [
           0,
           -1,
@@ -128,11 +128,11 @@ export const questions = [
   },
   {
     "id": 4,
-    "title": "团建，主持人说「大家轮流介绍一下自己吧」。",
+    "title": "团建时，主持人突然说：「大家轮流介绍一下自己吧。」你会？",
     "options": [
       {
         "letter": "A",
-        "text": "在心里排练两遍，还准备了备用版本",
+        "text": "轮到自己前，已经在脑子里过了两遍",
         "scores": [
           -1,
           1,
@@ -141,7 +141,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "站起来就讲，讲完顺手把下一个人也 cue 了",
+        "text": "站起来就说，讲完还能顺手 cue 下一个人",
         "scores": [
           1,
           -1,
@@ -150,7 +150,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "先听别人讲，看大家介绍到多长，再决定自己讲多少",
+        "text": "先听前面的人都讲多长，再决定自己讲多少",
         "scores": [
           0,
           1,
@@ -159,7 +159,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "「我是XX，做XX的，多指教。」三个字说完的绝不用四个",
+        "text": "「我是 XX，负责 XX，大家多关照。」结束",
         "scores": [
           0,
           -1,
@@ -170,11 +170,11 @@ export const questions = [
   },
   {
     "id": 5,
-    "title": "朋友说「今晚来我家吃饭，还有几个你不认识的人」。",
+    "title": "朋友说：「今晚来我家吃饭吧，还有几个你不认识的人。」你会？",
     "options": [
       {
         "letter": "A",
-        "text": "「好，几点到合适？都有谁呀？」（脸我记不住，人数我得知道）",
+        "text": "「可以呀，几点？大概几个人？」先知道现场规模",
         "scores": [
           -1,
           1,
@@ -183,7 +183,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「来！我带两个菜。」菜是现买的，热情是真的",
+        "text": "「来啊！我顺路带点吃的。」",
         "scores": [
           1,
           -1,
@@ -192,7 +192,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "「有点突然，晚点回你。」然后认真想了两小时",
+        "text": "「有点突然，我晚点告诉你。」需要先在脑子里预演一下",
         "scores": [
           -1,
           1,
@@ -201,7 +201,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "「行，到时候看情况。」心里排好了，嘴上先留个余地",
+        "text": "「行啊，到时候看。」答应得很轻松，去不去先不说死",
         "scores": [
           1,
           -1,
@@ -212,11 +212,11 @@ export const questions = [
   },
   {
     "id": 6,
-    "title": "电梯里遇到同事，你们有 20 层楼的时间。",
+    "title": "打车时发现司机顺路拼了另外两个人，接下来还有半小时车程，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "主动开个话题，反正闲着也是闲着",
+        "text": "很快就能聊上，甚至下车前已经知道别人要去哪儿干嘛",
         "scores": [
           1,
           0,
@@ -225,7 +225,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "打个招呼，然后各看各的手机",
+        "text": "戴上耳机，看窗外，努力把这辆车当成只有自己一个人",
         "scores": [
           -1,
           0,
@@ -234,7 +234,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "先看他状态，他想聊就聊，他不想聊就安静",
+        "text": "看大家状态，有人聊就接两句，没人聊正好安静坐着",
         "scores": [
           0,
           0,
@@ -243,7 +243,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "「最近怎么样？」一句话把话头递过去",
+        "text": "别人开口时会认真回应，自己不会特意找话题",
         "scores": [
           0,
           0,
@@ -254,11 +254,11 @@ export const questions = [
   },
   {
     "id": 7,
-    "title": "你在群里发了一条消息，半小时没人回。",
+    "title": "你突然被拉进一个新群，里面十几个人你只认识一个，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "直接再补一句「有人吗？」，或者@一个人",
+        "text": "很快冒泡：「大家好～」顺便接两句群里的话题",
         "scores": [
           1,
           0,
@@ -267,7 +267,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "撤回。假装自己什么也没发过",
+        "text": "默默潜水，最好没人发现新进来一个人",
         "scores": [
           -1,
           0,
@@ -276,7 +276,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "不问了，把手机扣在桌上，然后每三分钟翻一次",
+        "text": "先把群聊从头翻一遍，看大家都是什么画风，再决定要不要说话",
         "scores": [
           0,
           -1,
@@ -285,7 +285,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "先看看大家是不是都在忙，再决定催不催",
+        "text": "先看看群是干嘛的、大家怎么聊天，找到合适的话题再开口",
         "scores": [
           0,
           1,
@@ -296,11 +296,11 @@ export const questions = [
   },
   {
     "id": 8,
-    "title": "周末两天完全没有任何安排。",
+    "title": "周末两天突然完全空了，没有任何安排，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "提前排满，最好约上朋友（闲下来这件事我处理不好）",
+        "text": "赶紧约人，把两天填得差不多",
         "scores": [
           1,
           1,
@@ -309,7 +309,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "睡到自然醒，谁也不告诉",
+        "text": "太好了。先睡到自然醒，其他醒了再说",
         "scores": [
           -1,
           -1,
@@ -318,7 +318,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "想约人，一直没开口，到周六下午就算了",
+        "text": "有点想约人，但一直没开口，最后不知不觉就周日下午了",
         "scores": [
           0,
           -1,
@@ -327,7 +327,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "一天给自己，一天留给别人，提前说清楚",
+        "text": "一天留给自己，一天约人，提前分配得明明白白",
         "scores": [
           0,
           1,
@@ -338,11 +338,11 @@ export const questions = [
   },
   {
     "id": 9,
-    "title": "出发旅行的前一晚。",
+    "title": "明天一早要出发旅行，现在已经晚上十一点了，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "行李早收好了，路线和餐厅都在手机里（连备选餐厅也有）",
+        "text": "行李早就收好了，路线、餐厅、备选方案都在手机里",
         "scores": [
           0,
           1,
@@ -351,7 +351,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "什么都没收，明早起来随手抓两件",
+        "text": "先睡，明早起来再抓几件衣服塞进去",
         "scores": [
           0,
           -1,
@@ -360,7 +360,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "拉个群，列清单，大家分着带",
+        "text": "在群里发清单：「充电宝谁带？药谁带？伞谁带？」",
         "scores": [
           1,
           1,
@@ -369,7 +369,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "安静收完行李，谁也没告诉，直接睡了",
+        "text": "自己慢慢收完，确认闹钟，睡觉",
         "scores": [
           -1,
           -1,
@@ -380,11 +380,11 @@ export const questions = [
   },
   {
     "id": 10,
-    "title": "同事约你周五下班去唱歌，但你已经挺累了。",
+    "title": "同事约你周五下班去唱歌，但你今天已经挺累了，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "去。累这件事，一进门就忘了",
+        "text": "去。都约到这儿了，先玩了再说",
         "scores": [
           1,
           -1,
@@ -393,7 +393,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「今天想早点回家，下周再约。」",
+        "text": "「今天有点累，我先回家，下次约。」",
         "scores": [
           -1,
           1,
@@ -402,7 +402,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "去，但先声明「我待一小时就走」——结果唱到最后",
+        "text": "「可以，但我最多待一小时。」先把退出时间说好",
         "scores": [
           0,
           1,
@@ -411,7 +411,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "「看情况吧。」然后一路纠结到下班，最后还是去了",
+        "text": "「到时候看吧。」一路纠结到下班再决定",
         "scores": [
           0,
           -1,
@@ -422,7 +422,7 @@ export const questions = [
   },
   {
     "id": 11,
-    "title": "一个很久没联系的朋友突然发来「在吗？」",
+    "title": "一个很久没联系的朋友突然发来一句：「在吗？」你会？",
     "options": [
       {
         "letter": "A",
@@ -435,7 +435,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "先放一放，等忙完手上的事再认真回",
+        "text": "先把手里的事做完，等有空了再认真回",
         "scores": [
           -1,
           1,
@@ -444,7 +444,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "先回一个表情包，然后想半天下一句说什么",
+        "text": "看到消息先放着，脑子里已经开始猜：他找我干嘛？",
         "scores": [
           -1,
           0,
@@ -453,7 +453,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "直接打电话过去：「有事说事。」",
+        "text": "懒得猜，直接打过去：「咋了？」",
         "scores": [
           1,
           -1,
@@ -464,11 +464,11 @@ export const questions = [
   },
   {
     "id": 12,
-    "title": "你发的一条动态收到了很多评论。",
+    "title": "你发的一条动态突然收到了很多评论，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "一条条回，还会顺着话题继续聊",
+        "text": "基本都会回，而且很容易从评论区继续聊起来",
         "scores": [
           1,
           0,
@@ -477,7 +477,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "全部看完，然后只回表情",
+        "text": "每条都看了，大部分回个表情就算回应",
         "scores": [
           0,
           0,
@@ -486,7 +486,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "挑几个熟的认真回，剩下的默默点赞",
+        "text": "熟的人认真回，其他人的点个赞",
         "scores": [
           -1,
           0,
@@ -495,7 +495,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "心里特别高兴，但要等晚上安静下来，一条条认真回",
+        "text": "当下不一定回，晚上有空了再一条条认真回复",
         "scores": [
           0,
           0,
@@ -506,11 +506,11 @@ export const questions = [
   },
   {
     "id": 13,
-    "title": "聚会上大家开始玩「轮流讲一件糗事」。",
+    "title": "朋友带你见一个他很熟、但你完全不认识的人，还热情介绍：「你俩肯定聊得来。」你会？",
     "options": [
       {
         "letter": "A",
-        "text": "第一个举手，讲得最有画面感",
+        "text": "「真的吗？那我先问三个问题。」很快就能把话接起来",
         "scores": [
           1,
           -1,
@@ -519,7 +519,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "早就备好一件「安全糗事」，随时能讲",
+        "text": "先从安全话题聊起，慢慢确认到底哪里「聊得来」",
         "scores": [
           0,
           1,
@@ -528,7 +528,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "「我就算了。」笑着把话筒递出去（其实心里那件更精彩）",
+        "text": "笑着打个招呼，接下来主要负责听",
         "scores": [
           -1,
           -1,
@@ -537,7 +537,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "心里有一件，想了半天还是没说，跟着大家一起笑",
+        "text": "脑子里其实有几个话题，但一直等一个自然的开口时机",
         "scores": [
           0,
           1,
@@ -548,11 +548,11 @@ export const questions = [
   },
   {
     "id": 14,
-    "title": "计划好的行程被临时改了。",
+    "title": "原本计划好的行程，出门前突然被改了，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "有点烦躁，立刻重排一版发到群里等确认",
+        "text": "有点烦，但马上重新排一版：「那我们改成这样行不行？」",
         "scores": [
           0,
           1,
@@ -561,7 +561,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「都行啊。」跟着走，走到哪算哪",
+        "text": "「都可以啊。」去哪儿算哪儿",
         "scores": [
           0,
           -1,
@@ -570,7 +570,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "有点难受，但先不说，自己慢慢消化",
+        "text": "心里有点不舒服，但不太想扫兴，先算了",
         "scores": [
           -1,
           0,
@@ -579,7 +579,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "直接说：「我更想去原来那个，能换回来吗？」",
+        "text": "直接说：「我其实还是更想按原计划，可以不改吗？」",
         "scores": [
           1,
           0,
@@ -590,11 +590,11 @@ export const questions = [
   },
   {
     "id": 15,
-    "title": "晚上十一点，朋友发来一条很长的吐槽。",
+    "title": "晚上十一点，朋友突然发来一大段吐槽，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "立刻回一大段，说不清楚就直接打电话过去",
+        "text": "立刻开始回，说不清楚就直接打电话",
         "scores": [
           1,
           -1,
@@ -603,7 +603,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "认真读完，回一句「我在」，然后陪到对方睡着",
+        "text": "认真看完，先回：「我在，你慢慢说。」",
         "scores": [
           0,
           1,
@@ -612,7 +612,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "先看完，明早再回一条条理清楚的",
+        "text": "全部看完，但觉得今晚脑子已经转不动了，明早再认真回",
         "scores": [
           0,
           1,
@@ -621,7 +621,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "回一个抱抱表情，然后一整晚在心里替对方着急",
+        "text": "回一个抱抱或者安慰表情，之后躺床上还一直惦记这件事",
         "scores": [
           -1,
           -1,
@@ -632,11 +632,11 @@ export const questions = [
   },
   {
     "id": 16,
-    "title": "约好七点见，朋友七点二十还没到。",
+    "title": "约好七点见面，朋友七点二十还没到，你会？",
     "options": [
       {
         "letter": "A",
-        "text": "一句「到哪了？」发过去，顺便把菜单先看好了",
+        "text": "发一句：「到哪儿了？」顺便先把菜单看了",
         "scores": [
           1,
           1,
@@ -645,7 +645,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "找个地方坐下，先给自己点一杯，等他来了再说",
+        "text": "找个地方坐下，先喝点东西，他来了再说",
         "scores": [
           -1,
           -1,
@@ -654,7 +654,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "心里默默算时间，但不说，等到七点半才发「你到哪了」",
+        "text": "心里一直看时间，但先忍着，等得更久一点才问",
         "scores": [
           0,
           1,
@@ -663,7 +663,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "顺手在附近逛一圈，反正他到了会叫我",
+        "text": "顺便在附近逛逛，反正到了他会联系我",
         "scores": [
           0,
           -1,
@@ -674,11 +674,11 @@ export const questions = [
   },
   {
     "id": 17,
-    "title": "朋友转发了一个你完全不感兴趣的活动，问「去吗？」",
+    "title": "朋友转给你一个你完全不感兴趣的活动，问：「去吗？」你会？",
     "options": [
       {
         "letter": "A",
-        "text": "「不太想去，我这次 pass，你们玩。」",
+        "text": "「不太感兴趣，我这次就不去了，你们玩。」",
         "scores": [
           0,
           1,
@@ -687,7 +687,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "「好啊。」去了之后全程神游，回来还说挺好的",
+        "text": "「好啊。」先答应再说，去了以后发现果然没兴趣",
         "scores": [
           0,
           1,
@@ -696,7 +696,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "「看时间吧。」拖到最后一刻，用行程自然地推掉",
+        "text": "「到时候看时间吧。」没有直接拒绝，最后大概率不去",
         "scores": [
           -1,
           -1,
@@ -705,7 +705,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "「去啊，反正人多热闹。」去了发现确实没意思，但认识了两个人",
+        "text": "「去呗，人多也挺好玩。」活动不重要，人比较重要",
         "scores": [
           1,
           -1,
@@ -716,11 +716,11 @@ export const questions = [
   },
   {
     "id": 18,
-    "title": "和朋友聚完，刚到家。下面哪个反应最像你？",
+    "title": "和朋友聚完刚到家，下面哪个反应最像你？",
     "options": [
       {
         "letter": "A",
-        "text": "在群里发一句：“今天好开心！”这句必须让大家知道。",
+        "text": "在群里发一句：「今天好开心！」不说出来总觉得少点什么",
         "scores": [
           0,
           0,
@@ -729,7 +729,7 @@ export const questions = [
       },
       {
         "letter": "B",
-        "text": "翻翻今天的照片，心里挺开心，但没打算发消息。",
+        "text": "翻翻今天的照片，自己开心一会儿，就准备洗澡睡觉",
         "scores": [
           0,
           0,
@@ -738,7 +738,7 @@ export const questions = [
       },
       {
         "letter": "C",
-        "text": "在群里喊：“这就结束了？还有人想聊会儿吗？”",
+        "text": "在群里问：「这就散了？还有人聊会儿吗？」",
         "scores": [
           1,
           0,
@@ -747,7 +747,7 @@ export const questions = [
       },
       {
         "letter": "D",
-        "text": "手机往旁边一放。好了，现在谁也别找，让我自己待会儿。",
+        "text": "手机往旁边一放。很好，今天的社交额度正式用完",
         "scores": [
           -1,
           0,
@@ -756,4 +756,4 @@ export const questions = [
       }
     ]
   }
-] as const satisfies Question[];
+];
