@@ -2,3 +2,10 @@ node_modules/
 dist/
 .env.local
 test-results/
+
+.dev.vars
+.env.stats
+.wrangler/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

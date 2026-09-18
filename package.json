@@ -7,8 +7,9 @@
     "dev": "vite --host 0.0.0.0 --port 5174",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
-    "test": "node tests/content.test.mjs && node tests/logic.test.mjs",
-    "test:ui": "node tests/interaction.cjs"
+    "test": "node tests/content.test.mjs && node tests/logic.test.mjs && node tests/statistics.mjs",
+    "test:ui": "node tests/interaction.cjs",
+    "test:stats": "node tests/statistics.mjs"
   },
   "dependencies": {
     "qrcode": "^1.5.4",

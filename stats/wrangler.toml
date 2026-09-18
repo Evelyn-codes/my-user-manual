@@ -1,0 +1,15 @@
+name = "my-user-manual-stats"
+main = "worker.mjs"
+compatibility_date = "2026-09-17"
+
+[vars]
+ALLOWED_ORIGINS = "https://evelyn-codes.github.io"
+
+[observability]
+enabled = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "my-user-manual-stats"
+database_id = "d9601574-4640-43a1-8035-a1d1d10b1f88"
+migrations_dir = "migrations"

@@ -1,0 +1,9 @@
+name = "manual-personality-stats"
+pages_build_output_dir = "public"
+compatibility_date = "2026-09-17"
+[vars]
+ALLOWED_ORIGINS = "https://evelyn-codes.github.io"
+[[d1_databases]]
+binding = "DB"
+database_name = "my-user-manual-stats"
+database_id = "d9601574-4640-43a1-8035-a1d1d10b1f88"
