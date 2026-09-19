@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');const path=require('node:path');const vm=require('node:vm');
 const {PNG}=require('pngjs');const jsQR=require('jsqr');
 const BASE=process.env.TEST_URL||'http://localhost:5174/';
-const STORAGE='my-user-manual:progress:v1';
+const STORAGE='my-user-manual:progress:v2';
 const design=JSON.parse(JSON.stringify(vm.runInNewContext(fs.readFileSync('design/content.js','utf8')+'\nDESIGN')));
 (async()=>{
  const {scoreAnswers}=await import('../src/lib/scoring.ts');
@@ -56,10 +56,14 @@ const design=JSON.parse(JSON.stringify(vm.runInNewContext(fs.readFileSync('desig
   await page.setViewportSize({width,height:812});
   for(const card of design.cards){
    const fixture=design.fixtures[card.key];
-   await page.evaluate(({STORAGE,fixture,key})=>localStorage.setItem(STORAGE,JSON.stringify({version:1,runId:'test-'+key,revision:1,phase:'completed',questionIndex:17,answers:fixture.answers})),{STORAGE,fixture,key:card.key});
+   await page.evaluate(({STORAGE,fixture,key})=>localStorage.setItem(STORAGE,JSON.stringify({version:2,runId:'test-'+key,revision:1,phase:'completed',questionIndex:17,answers:fixture.answers})),{STORAGE,fixture,key:card.key});
    await page.reload();await page.getByRole('button',{name:'分享我的说明书'}).waitFor();
    assert.equal(await page.locator('.personality-name small').textContent(),card.code);
    assert.equal(await page.locator('.description').textContent(),card.description);
+   assert.equal(await page.locator('.self-tips p').textContent(),card.selfTips);
+   assert.equal(await page.locator('.status').textContent(),card.footer);
+   assert.ok(await page.locator('.status').evaluate(el=>!!(el.compareDocumentPosition(document.querySelector('.self-tips'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+   assert.ok(!/undefined|NaN/.test(await page.locator('main').textContent()));
    assert.deepEqual(await page.locator('.metric b').allTextContents(),fixture.bars.map(n=>n+'%'));await audit(`result ${card.key} at ${width}`);
    await page.getByRole('button',{name:'分享我的说明书'}).click();
    const image=page.locator('.poster-image');await image.waitFor({timeout:20000}).catch(async error=>{console.error('Poster failure',card.code,await page.getByRole('dialog').textContent());throw error});await image.evaluate(el=>el.decode());
@@ -90,7 +94,7 @@ const design=JSON.parse(JSON.stringify(vm.runInNewContext(fs.readFileSync('desig
  const deniedPage=await denied.newPage();await deniedPage.goto(BASE);await deniedPage.getByRole('button',{name:'生成我的说明书'}).click();await deniedPage.getByRole('radio').nth(0).check();await deniedPage.getByRole('button',{name:'下一题'}).click();assert.equal(await deniedPage.locator('.progress-label b').textContent(),'第 2 / 18 题');assert.equal(await deniedPage.locator('.storage-notice').count(),1);await denied.close();
  // WeChat UA: saveable image shown, no fake direct-share or download action.
  const wechat=await browser.newContext({userAgent:'Mozilla/5.0 MicroMessenger/8.0',viewport:{width:375,height:812}});const wp=await wechat.newPage();await wp.goto(BASE);
- await wp.evaluate(({STORAGE,answers})=>localStorage.setItem(STORAGE,JSON.stringify({version:1,runId:'wechat',revision:1,phase:'completed',questionIndex:17,answers})),{STORAGE,answers:design.fixtures['A1-B1-C2'].answers});await wp.reload();await wp.getByRole('button',{name:'分享我的说明书'}).click();await wp.locator('.poster-image').waitFor();assert.equal(await wp.getByText('长按图片保存，再发给朋友。').count(),1);assert.equal(await wp.getByRole('link',{name:'下载海报'}).count(),0);await wechat.close();
+ await wp.evaluate(({STORAGE,answers})=>localStorage.setItem(STORAGE,JSON.stringify({version:2,runId:'wechat',revision:1,phase:'completed',questionIndex:17,answers})),{STORAGE,answers:design.fixtures['A1-B1-C2'].answers});await wp.reload();await wp.getByRole('button',{name:'分享我的说明书'}).click();await wp.locator('.poster-image').waitFor();assert.equal(await wp.getByText('长按图片保存，再发给朋友。').count(),1);assert.equal(await wp.getByRole('link',{name:'下载海报'}).count(),0);await wechat.close();
  assert.deepEqual(errors,[]);fs.writeFileSync(path.join(output,'checks.json'),JSON.stringify({checks,errors},null,2));
  console.log('PASS: durable Q6/complete/restart/cross-tab recovery; 72 real result/poster layouts; all 18 PNGs and QR decodes; copy fallback; malformed storage and quota errors; WeChat UI.');
  }finally{await browser.close()}

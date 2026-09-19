@@ -2,25 +2,27 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {questions} from '../src/data/questions.ts';
 import {results} from '../src/data/results.ts';
-import {scoreAnswers,resultKey} from '../src/lib/scoring.ts';
+import {scoreAnswers,resultKey,percentage} from '../src/lib/scoring.ts';
 import {parseProgress,newProgress,saveProgress,readProgress,PROGRESS_KEY} from '../src/lib/progress.ts';
 import {buildResultLink} from '../src/lib/links.ts';
 const sourceScores=JSON.parse(readFileSync(new URL('./fixtures/source-scores.json',import.meta.url),'utf8'));
 assert.equal(sourceScores.length,72);assert.deepEqual(questions.flatMap(q=>q.options.map(o=>o.scores)),sourceScores);
 for(const q of questions)for(let axis=0;axis<3;axis++)assert.equal(q.options.reduce((s,o)=>s+o.scores[axis],0),0);
-assert.equal(resultKey([-3,3,1],0),'A1-B1-C1');
-for(const [a,A] of [[-3,1],[-2,2],[2,2],[3,3]])for(const [b,B] of [[-3,3],[-2,2],[2,2],[3,1]])for(const last of [0,1,2,3])assert.equal(resultKey([a,b,0],last),`A${A}-B${B}-C${last%2===0?1:2}`);
+assert.equal(resultKey([-2,2,1],0),'A1-B1-C1');
+for(const [a,A] of [[-6,1],[-2,1],[-1,2],[0,2],[1,2],[2,3],[6,3]])for(const [b,B] of [[-6,3],[-2,3],[-1,2],[0,2],[1,2],[2,1],[6,1]])for(const last of [0,1,2,3])assert.equal(resultKey([a,b,0],last),`A${A}-B${B}-C${last<2?1:2}`);
 let seed=71;const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed>>>30};
 const tieCases=new Map(),mapped=new Set();
 for(let t=0;t<10000;t++){
  const answers=Array.from({length:18},rnd);const scored=scoreAnswers(answers);
  const expected=[0,1,2].map(axis=>answers.reduce((s,a,i)=>s+sourceScores[i*4+a][axis],0));
- assert.deepEqual(scored.scores,expected);assert.deepEqual(scored.bars,expected.map(n=>Math.round((n+18)/36*100)));
+ assert.deepEqual(scored.scores,expected);assert.deepEqual(scored.bars,expected.map(n=>Math.round((n+6)/12*100)));
  assert.deepEqual(scoreAnswers([...answers]),scored);mapped.add(scored.key);
- if(expected[2]===0){tieCases.set(answers[17],answers);assert.ok(scored.key.endsWith(answers[17]%2===0?'C1':'C2'))}
+ if(expected[2]===0){tieCases.set(answers[17],answers);assert.ok(scored.key.endsWith(answers[17]<2?'C1':'C2'))}
 }
 assert.equal(mapped.size,18);assert.equal(tieCases.size,4);
 for(const bad of [[],Array(18).fill(null),Array(18).fill(4),Array(18).fill(.5)])assert.throws(()=>scoreAnswers(bad));
+for(const [s,pct] of [[-99,0],[-6,0],[0,50],[6,100],[99,100]])assert.equal(percentage(s),pct);
+const axes=[0,0,0];for(const q of questions){const active=[0,1,2].filter(axis=>q.options.some(o=>o.scores[axis]!==0));assert.equal(active.length,1);axes[active[0]]++;for(const o of q.options){assert.ok(o.scores.every(n=>[-1,0,1].includes(n)));assert.ok(o.scores.filter(n=>n!==0).length<=1)}}assert.deepEqual(axes,[6,6,6]);
 const p=newProgress();p.questionIndex=5;p.answers.splice(0,5,0,1,2,3,0);assert.deepEqual(parseProgress(JSON.stringify(p)),p);
 assert.equal(parseProgress(JSON.stringify({...p,phase:'completed'})),null);
 assert.equal(parseProgress(JSON.stringify({...p,questionIndex:18})),null);
@@ -28,7 +30,8 @@ assert.equal(parseProgress('{broken'),null);assert.equal(parseProgress(JSON.stri
 const store=new Map();globalThis.localStorage={getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)};
 assert.equal(saveProgress(p),'');assert.deepEqual(readProgress().progress,p);
 const latest=newProgress();saveProgress(latest);assert.equal(store.size,1);assert.equal(readProgress().progress.runId,latest.runId);assert.notEqual(latest.runId,p.runId);
-assert.equal(PROGRESS_KEY,'my-user-manual:progress:v1');
+store.clear();store.set('my-user-manual:progress:v1',JSON.stringify({...p,version:1}));assert.equal(readProgress().progress,null);assert.match(readProgress().problem,/题库已升级/);assert.ok(store.has('my-user-manual:progress:v1'));
+assert.equal(PROGRESS_KEY,'my-user-manual:progress:v2');
 globalThis.localStorage={getItem:()=>{throw Error('blocked')},setItem:()=>{throw Error('blocked')}};
 assert.ok(readProgress().problem);assert.ok(saveProgress(p));
 assert.equal(buildResultLink('A1-B1-C2','https://example.com/manual/','http://localhost:5174/#result'),'https://example.com/manual/?from=poster&result=A1-B1-C2');

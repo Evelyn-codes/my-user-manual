@@ -18,8 +18,9 @@ for(const [index,result] of results.entries()){
  const fixture=demoFixtures[result.key];
  const scores=[0,1,2].map(axis=>questions.reduce((sum,q,i)=>sum+q.options[fixture.answers[i]].scores[axis],0));
  assert.deepEqual(fixture.scores,scores);
- assert.deepEqual(fixture.bars,scores.map(score=>Math.round((score+18)/36*100)));
+ assert.deepEqual(fixture.bars,scores.map(score=>Math.round((score+6)/12*100)));
 }
-assert.ok(questions[0].options[0].text.endsWith('先把信息补齐再说'));
-assert.ok(results[3].description.startsWith('你坐那儿看起来只是来吃饭的'));
-console.log('PASS: 18 questions, 72 exact options/scores, 18 revised result cards/image mappings and fixed preview fixtures.');
+const source=JSON.parse(readFileSync(new URL('./fixtures/content-v2.json',import.meta.url),'utf8'));
+assert.deepEqual(questions,source.questions);assert.deepEqual(results,source.cards);
+assert.equal(results[9].name,'缓冲中');assert.ok(results.every(c=>c.selfTips&&c.tips.length===2));
+console.log('PASS: exact V2 questions/options/scores/cards; images and all 18 fixtures.');

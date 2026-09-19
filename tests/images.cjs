@@ -9,7 +9,7 @@ const design=vm.runInNewContext(readFileSync('design/content.js','utf8')+'\nDESI
  const page=await browser.newPage({viewport:{width:375,height:812}});
  const base=process.env.TEST_URL||'http://localhost:5174/';
  await page.goto(base);
- await page.evaluate(answers=>localStorage.setItem('my-user-manual:progress:v1',JSON.stringify({version:1,runId:'image-check',revision:1,phase:'completed',questionIndex:17,answers})),design.fixtures['A1-B3-C2'].answers);
+ await page.evaluate(answers=>localStorage.setItem('my-user-manual:progress:v2',JSON.stringify({version:2,runId:'image-check',revision:1,phase:'completed',questionIndex:17,answers})),design.fixtures['A1-B3-C2'].answers);
  let requests=0;
  await page.route('**/characters/v2/06.jpg',async route=>{requests++;await new Promise(r=>setTimeout(r,1500));await route.continue()});
  await page.reload();await page.getByRole('button',{name:'分享我的说明书'}).click();
